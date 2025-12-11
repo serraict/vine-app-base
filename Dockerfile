@@ -12,14 +12,12 @@ RUN apt-get update && \
     gnupg2 \
     apt-transport-https \
     cron \
+    && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv globally
 RUN pip install --no-cache-dir uv
 
-# Clean up to reduce the image size
-RUN apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
 
 # Set default shell to bash for compatibility
 SHELL ["/bin/bash", "-c"]
