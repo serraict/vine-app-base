@@ -22,9 +22,7 @@ RUN apt-get update && \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install uv globally
-RUN pip3 install --no-cache-dir uv
-
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Set default shell to bash for compatibility
 SHELL ["/bin/bash", "-c"]
