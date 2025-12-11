@@ -15,7 +15,7 @@ RUN apt-get update && \
     && rm -rf /var/lib/apt/lists/*
 
 # Install uv globally
-RUN pip3 install --no-cache-dir uv
+RUN pip install --no-cache-dir uv
 
 # Clean up to reduce the image size
 RUN apt-get clean && \
