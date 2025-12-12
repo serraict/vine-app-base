@@ -2,26 +2,29 @@ FROM python:3.12
 
 
 
-# Install system dependencies and Microsoft ODBC Drivers for SQL Server
+
+# Install system dependencies
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    # Build dependencies
     git \
     build-essential \
-    # odbc    
     unixodbc \
     unixodbc-dev \
     freetds-dev \
     freetds-bin \
     tdsodbc \
-    # utils
     curl \
     gnupg2 \
     apt-transport-https \
     cron \
-    # Add Microsoft ODBC Driver 18 and 17 for SQL Server
-    && curl https://packages.microsoft.com/keys/microsoft.asc | apt-key add - \
-    && curl https://packages.microsoft.com/config/ubuntu/24.04/prod.list -o /etc/apt/sources.list.d/mssql-release.list \
+    ca-certificates \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+# Install Microsoft ODBC Drivers 18 and 17 for SQL Server (official method)
+RUN curl -sSL -O https://packages.microsoft.com/config/ubuntu/24.04/packages-microsoft-prod.deb \
+    && dpkg -i packages-microsoft-prod.deb \
+    && rm packages-microsoft-prod.deb \
     && apt-get update \
     && ACCEPT_EULA=Y apt-get install -y msodbcsql18 msodbcsql17 \
     && apt-get clean \
