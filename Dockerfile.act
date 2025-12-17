@@ -15,6 +15,7 @@ RUN apt-get update && \
     apt-transport-https \
     cron \
     netcat-openbsd \
+    iputils-ping \
     python3 \
     python3-pip \
     ca-certificates \
