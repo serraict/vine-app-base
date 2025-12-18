@@ -10,6 +10,8 @@ RUN apt-get update && \
     freetds-dev \
     freetds-bin \
     tdsodbc \
+    libfbclient2 \
+    firebird-utils \
     curl \
     gnupg2 \
     apt-transport-https \
